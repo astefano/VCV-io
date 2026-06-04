@@ -26,6 +26,7 @@ import VCVio.CryptoFoundations.FiatShamir.WithAbort
 import VCVio.CryptoFoundations.FiatShamir.WithAbort.Cost
 import VCVio.CryptoFoundations.FiatShamir.WithAbort.ExpectedCost
 import VCVio.CryptoFoundations.FiatShamir.WithAbort.Security
+import VCVio.CryptoFoundations.FiatShamir.WithAbort.Truncation
 import VCVio.CryptoFoundations.Fischlin
 import VCVio.CryptoFoundations.FujisakiOkamoto
 import VCVio.CryptoFoundations.FujisakiOkamoto.Composed
