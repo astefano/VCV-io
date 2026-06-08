@@ -82,6 +82,19 @@ lemma run'_lift' (x : m α) (s : σ) :
     (StateT.lift x : StateT σ m α).run' s = x := by
   simp [StateT.run'_eq, map_eq_bind_pure_comp, bind_assoc]
 
+/-- Running a `StateT` computation and projecting the value component equals `run'`:
+`(x.run s >>= fun p => pure p.1) = x.run' s`. -/
+@[simp]
+theorem run_bind_fst_eq_run' (x : StateT σ m α) (s : σ) :
+    (x.run s >>= fun p => pure p.1) = x.run' s := by
+  simp [StateT.run'_eq, bind_pure_comp]
+
+/-- Push `run'` through a `monadLift` bind: a lifted base computation `ma` binds before the state
+is threaded, so `((liftM ma : StateT σ m α) >>= G).run' s = ma >>= fun a => (G a).run' s`. -/
+theorem run'_monadLift_bind (ma : m α) (G : α → StateT σ m β) (s : σ) :
+    ((liftM ma : StateT σ m α) >>= G).run' s = ma >>= fun a => (G a).run' s := by
+  simp [StateT.run'_eq, StateT.run_bind, StateT.run_monadLift, bind_map_left, map_bind]
+
 end run'
 
 end StateT
